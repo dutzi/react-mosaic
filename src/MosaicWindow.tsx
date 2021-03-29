@@ -22,7 +22,6 @@ import { MosaicDropTarget } from './MosaicDropTarget';
 import { CreateNode, MosaicBranch, MosaicDirection, MosaicDragType, MosaicKey } from './types';
 import { createDragToUpdates } from './util/mosaicUpdates';
 import { getAndAssertNodeAtPathExists } from './util/mosaicUtilities';
-import { OptionalBlueprint } from './util/OptionalBlueprint';
 
 export interface MosaicWindowProps<T extends MosaicKey> {
   title: string;
@@ -72,7 +71,6 @@ export class InternalMosaicWindow<T extends MosaicKey> extends React.Component<
         </div>
         <div className="mosaic-window-body">
           <h4>{title}</h4>
-          <OptionalBlueprint.Icon iconSize={72} icon="application" />
         </div>
       </div>
     ),
@@ -160,18 +158,9 @@ export class InternalMosaicWindow<T extends MosaicKey> extends React.Component<
     return (
       <div className={classNames('mosaic-window-toolbar', { draggable: draggableAndNotRoot })}>
         {titleDiv}
-        <div className={classNames('mosaic-window-controls', OptionalBlueprint.getClasses('BUTTON_GROUP'))}>
+        <div className={classNames('mosaic-window-controls')}>
           {hasAdditionalControls && (
-            <button
-              onClick={() => this.setAdditionalControlsOpen(!additionalControlsOpen)}
-              className={classNames(
-                OptionalBlueprint.getClasses('BUTTON', 'MINIMAL'),
-                OptionalBlueprint.getIconClass('MORE'),
-                {
-                  [OptionalBlueprint.getClasses('ACTIVE')]: additionalControlsOpen,
-                },
-              )}
-            >
+            <button onClick={() => this.setAdditionalControlsOpen(!additionalControlsOpen)} className={classNames()}>
               <span className="control-text">{additionalControlButtonText!}</span>
             </button>
           )}

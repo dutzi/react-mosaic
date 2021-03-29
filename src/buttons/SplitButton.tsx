@@ -3,7 +3,6 @@ import noop from 'lodash/noop';
 import React from 'react';
 
 import { MosaicWindowContext } from '../contextTypes';
-import { OptionalBlueprint } from '../util/OptionalBlueprint';
 import { createDefaultToolbarButton, MosaicButtonProps } from './MosaicButton';
 
 export class SplitButton extends React.PureComponent<MosaicButtonProps> {
@@ -11,11 +10,7 @@ export class SplitButton extends React.PureComponent<MosaicButtonProps> {
   context!: MosaicWindowContext;
 
   render() {
-    return createDefaultToolbarButton(
-      'Split Window',
-      classNames('split-button', OptionalBlueprint.getIconClass('ADD_COLUMN_RIGHT')),
-      this.split,
-    );
+    return createDefaultToolbarButton('Split Window', classNames('split-button'), this.split);
   }
 
   private split = () => {

@@ -1,6 +1,6 @@
 {
-  "name": "react-mosaic-component",
-  "version": "4.1.1",
+  "name": "@notdutzi/react-mosaic-component",
+  "version": "5.0.1",
   "description": "A React Tiling Window Manager",
   "license": "Apache-2.0",
   "main": "lib/index.js",
@@ -9,14 +9,16 @@
   "sideEffects": [
     "*.css"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nomcopter/react-mosaic.git"
+    "url": "https://github.com/dutzi/react-mosaic.git"
   },
   "scripts": {
     "build": "npm-run-all clean -lp build:**",
     "build:ts": "tsc -p tsconfig-build.json",
-    "build:less": "lessc --autoprefix=defaults --source-map styles/index.less react-mosaic-component.css",
     "bundle": "rm -rf docs/ && webpack --config webpack/bundle.ts",
     "clean": "rm -rf lib/",
     "start": "webpack-dev-server --config webpack/hot.ts",
@@ -28,7 +30,8 @@
     "fix": "npm-run-all -lp fix:**",
     "fix:format": "yarn run prettier:run --write",
     "fix:lint": "yarn run test:lint --fix",
-    "version": "npm run bundle && git add -A docs/"
+    "version": "npm run bundle && git add -A docs/",
+    "prepack": "npm run build"
   },
   "devDependencies": {
     "@blueprintjs/core": "^3.15.1",

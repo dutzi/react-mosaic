@@ -24,6 +24,7 @@ export interface SplitProps extends EnabledResizeOptions {
 export class Split extends React.PureComponent<SplitProps> {
   private rootElement = React.createRef<HTMLDivElement>();
   private listenersBound = false;
+  private initialBodyCursor: string = '';
 
   static defaultProps = {
     onChange: () => void 0,
@@ -96,12 +97,17 @@ export class Split extends React.PureComponent<SplitProps> {
       }
     }
 
+    this.initialBodyCursor = document.body.style.cursor;
+    document.body.style.cursor = this.props.direction === 'column' ? 'ns-resize' : 'ew-resize';
+
     event.preventDefault();
     this.bindListeners();
   };
 
   private onMouseUp = (event: MouseEvent | TouchEvent) => {
     this.unbindListeners();
+
+    document.body.style.cursor = this.initialBodyCursor;
 
     const percentage = this.calculateRelativePercentage(event);
     this.props.onRelease!(percentage);

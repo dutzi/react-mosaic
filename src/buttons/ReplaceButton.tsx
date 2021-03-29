@@ -3,7 +3,6 @@ import noop from 'lodash/noop';
 import React from 'react';
 
 import { MosaicWindowContext } from '../contextTypes';
-import { OptionalBlueprint } from '../util/OptionalBlueprint';
 import { createDefaultToolbarButton, MosaicButtonProps } from './MosaicButton';
 
 export class ReplaceButton extends React.PureComponent<MosaicButtonProps> {
@@ -11,11 +10,7 @@ export class ReplaceButton extends React.PureComponent<MosaicButtonProps> {
   context!: MosaicWindowContext;
 
   render() {
-    return createDefaultToolbarButton(
-      'Replace Window',
-      classNames('replace-button', OptionalBlueprint.getIconClass('EXCHANGE')),
-      this.replace,
-    );
+    return createDefaultToolbarButton('Replace Window', classNames('replace-button'), this.replace);
   }
 
   private replace = () => {

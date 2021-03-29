@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import React from 'react';
 
 import { MosaicContext, MosaicRootActions, MosaicWindowContext } from '../contextTypes';
-import { OptionalBlueprint } from '../util/OptionalBlueprint';
 import { createDefaultToolbarButton, MosaicButtonProps } from './MosaicButton';
 
 export class RemoveButton extends React.PureComponent<MosaicButtonProps> {
@@ -13,11 +12,7 @@ export class RemoveButton extends React.PureComponent<MosaicButtonProps> {
     return (
       <MosaicContext.Consumer>
         {({ mosaicActions }) =>
-          createDefaultToolbarButton(
-            'Close Window',
-            classNames('close-button', OptionalBlueprint.getIconClass('CROSS')),
-            this.createRemove(mosaicActions),
-          )
+          createDefaultToolbarButton('Close Window', classNames('close-button'), this.createRemove(mosaicActions))
         }
       </MosaicContext.Consumer>
     );

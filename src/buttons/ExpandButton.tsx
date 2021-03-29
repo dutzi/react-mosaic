@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import React from 'react';
 
 import { MosaicContext, MosaicRootActions, MosaicWindowContext } from '../contextTypes';
-import { OptionalBlueprint } from '../util/OptionalBlueprint';
 import { createDefaultToolbarButton, MosaicButtonProps } from './MosaicButton';
 
 export class ExpandButton extends React.PureComponent<MosaicButtonProps> {
@@ -13,11 +12,7 @@ export class ExpandButton extends React.PureComponent<MosaicButtonProps> {
     return (
       <MosaicContext.Consumer>
         {({ mosaicActions }) =>
-          createDefaultToolbarButton(
-            'Expand',
-            classNames('expand-button', OptionalBlueprint.getIconClass('MAXIMIZE')),
-            this.createExpand(mosaicActions),
-          )
+          createDefaultToolbarButton('Expand', classNames('expand-button'), this.createExpand(mosaicActions))
         }
       </MosaicContext.Consumer>
     );
