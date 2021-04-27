@@ -58,6 +58,7 @@ export const MosaicDragType = {
 
 export interface EnabledResizeOptions {
   minimumPaneSizePercentage?: number; // Default: 20
+  allowMinimizedPanes?: boolean; // Default: 20
 }
 
 export type ResizeOptions = 'DISABLED' | EnabledResizeOptions;

@@ -128,7 +128,7 @@ export class Split extends React.PureComponent<SplitProps> {
   }, RESIZE_THROTTLE_MS);
 
   private calculateRelativePercentage(event: MouseEvent | TouchEvent): number {
-    const { minimumPaneSizePercentage, direction, boundingBox } = this.props;
+    const { minimumPaneSizePercentage, direction, boundingBox, allowMinimizedPanes } = this.props;
     const parentBBox = this.rootElement.current!.parentElement!.getBoundingClientRect();
     const location = isTouchEvent(event) ? event.changedTouches[0] : event;
 
@@ -141,7 +141,14 @@ export class Split extends React.PureComponent<SplitProps> {
 
     const relativePercentage = BoundingBox.getRelativeSplitPercentage(boundingBox, absolutePercentage, direction);
 
-    return clamp(relativePercentage, minimumPaneSizePercentage!, 100 - minimumPaneSizePercentage!);
+    if (allowMinimizedPanes) {
+      const heightPx = parentBBox.height * ((100 - boundingBox.bottom - boundingBox.top) / 100);
+      const minHeightPercentage = (25 / heightPx) * 100;
+
+      return clamp(relativePercentage, minHeightPercentage, 100 - minHeightPercentage);
+    } else {
+      return clamp(relativePercentage, minimumPaneSizePercentage!, 100 - minimumPaneSizePercentage!);
+    }
   }
 }
 
